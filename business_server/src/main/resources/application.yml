@@ -1,0 +1,4 @@
+# 配置文件选择
+spring:
+  profiles:
+    active: @activatedProperties@
