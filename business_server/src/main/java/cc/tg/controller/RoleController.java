@@ -31,8 +31,7 @@ public class RoleController {
     IRoleService roleService;
 
     @ApiModelProperty("全部权限列表")
-    @GetMapping("/menuTree")
-
+    @GetMapping("/roleTree")
     public ResultVO getRoles() {
         return ResultUtil.success(roleService.list());
     }

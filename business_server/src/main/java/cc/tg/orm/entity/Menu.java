@@ -42,7 +42,7 @@ public class Menu implements Serializable {
 
     private Boolean requireAuth;
 
-    private Integer parentId;
+    private Long parentId;
 
     private Boolean enabled;
 
@@ -54,5 +54,8 @@ public class Menu implements Serializable {
 
     @TableField(exist = false)
     private MenuMeta meta;
+
+    @TableField(exist = false)
+    private List<Long> roleIds;
 
 }
