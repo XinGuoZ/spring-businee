@@ -43,9 +43,7 @@
         <profile>
             <!-- 开发 -->
             <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
             <properties>
                 <activatedProperties>dev</activatedProperties>
             </properties>
@@ -64,6 +62,9 @@
             <properties>
                 <activatedProperties>prod</activatedProperties>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 </project>

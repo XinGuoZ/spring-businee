@@ -3,6 +3,7 @@ package cc.tg.orm.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -35,5 +36,19 @@ public class Role implements Serializable {
     @TableField("nameZh")
     private String nameZh;
 
+    @ApiModelProperty(hidden = true)
+    private String remark;
+
+    /**
+     * 删除状态 0-未删除 1-已删除
+     */
+    @ApiModelProperty(hidden = true)
+    private String removeStatus;
+
+    /**
+     * 创建时间
+     */
+    @ApiModelProperty(hidden = true)
+    private String createAt;
 
 }

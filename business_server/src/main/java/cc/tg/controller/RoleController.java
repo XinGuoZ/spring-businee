@@ -5,14 +5,17 @@ import cc.tg.model.vo.ResultVO;
 import cc.tg.orm.entity.Role;
 import cc.tg.service.IRoleService;
 import cc.tg.tools.ResultUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +36,20 @@ public class RoleController {
     @ApiModelProperty("全部权限列表")
     @GetMapping("/roleTree")
     public ResultVO getRoles() {
-        return ResultUtil.success(roleService.list());
+        List<Role> list = roleService.list(new LambdaQueryWrapper<Role>().eq(Role::getRemoveStatus, "0"));
+        return ResultUtil.success(JSONUtil.parse(list));
+    }
+
+    @ApiModelProperty("添加和修改权限")
+    @PostMapping("/addOrEditRoles")
+    public ResultVO addOrEditRoles(@RequestBody @Valid Role role) {
+        return ResultUtil.success(roleService.addOrEditRoles(role));
+    }
+    @ApiModelProperty("添加和修改权限")
+    @PostMapping("/delRoles/{id}")
+    public ResultVO delRoles(@PathVariable("id") Long id) {
+        Role role = new Role();
+        role.setId(id).setRemoveStatus("1");
+        return ResultUtil.success(roleService.delRoles(role));
     }
 }
