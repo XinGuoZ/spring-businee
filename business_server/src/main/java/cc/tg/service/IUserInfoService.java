@@ -42,4 +42,13 @@ public interface IUserInfoService {
      * @return      java.util.List<cc.tg.orm.entity.UserInfo>
      **/
     List<UserInfo> getUserByRoleId(Long roleId);
+
+    /**
+     * 添加和修改
+     * @Author     xinguoz
+     * @Date        2020/11/16 17:50
+     * @Param       userInfo
+     * @return      cc.tg.orm.entity.UserInfo
+     **/
+    UserInfo addOrEditUser(UserInfo userInfo);
 }

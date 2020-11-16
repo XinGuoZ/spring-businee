@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/tg/group")
-@Api("管理员组")
+@Api(value = "管理员组",tags = {"管理员组"})
 public class GroupController {
 
     @Autowired
@@ -43,7 +43,7 @@ public class GroupController {
         return ResultUtil.success(groupService.addGroup(group));
     }
 
-    @ApiOperation("添加管理组")
+    @ApiOperation("修改管理组")
     @PostMapping("editGroup")
     public ResultVO editGroup (@RequestBody SysGroup group) {
         SysGroup sysGroup = groupService.editGroup(group);

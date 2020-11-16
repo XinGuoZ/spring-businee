@@ -113,6 +113,10 @@ public class UserInfo implements UserDetails {
     @TableField(exist = false)
     private List<Role> roles;
 
+    @ApiModelProperty(value = "用户角色")
+    @TableField(exist = false)
+    private List<Long> roleIds;
+
 
     @JsonIgnore
     @Override

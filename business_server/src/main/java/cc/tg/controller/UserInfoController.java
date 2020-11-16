@@ -37,11 +37,11 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUsersByDeptId(queryDeptDTO));
     }
 
-    @ApiOperation("添加管理组")
-    @PostMapping("addUser")
-    public ResultVO addUser (@Valid @RequestBody UserInfo userInfo) {
-        if(Objects.isNull(userInfoService.addUser(userInfo))) {
-            return ResultUtil.error("管理员添加失败");
+    @ApiOperation("添加用户")
+    @PostMapping("addOrEditUser")
+    public ResultVO addOrEditUser (@Valid @RequestBody UserInfo userInfo) {
+        if(Objects.isNull(userInfoService.addOrEditUser(userInfo))) {
+            return ResultUtil.error("管理员操作失败");
         }
         return ResultUtil.success(MyConst.OPT_SUCCESS,userInfo);
     }
