@@ -24,4 +24,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
 server:
-  port: 9080
+  port: 9081
