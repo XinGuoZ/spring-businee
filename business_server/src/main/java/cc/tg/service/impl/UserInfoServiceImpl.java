@@ -10,6 +10,7 @@ import cc.tg.service.IUserInfoService;
 import cc.tg.service.IUserRoleService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -107,9 +108,20 @@ public class UserInfoServiceImpl implements IUserInfoService, UserDetailsService
                 userRole.setUserId(userInfo.getId());
                 userRoles.add(userRole);
             }
-            userRoleService.saveBatch(userRoles);
+            userRoles.forEach(p->{
+                int count = userRoleService.count(new LambdaQueryWrapper<UserRole>().eq(UserRole::getRid, p.getRid()).eq(UserRole::getUserId, p.getUserId()));
+                if (count<1) {
+                    userRoleService.save(p);
+                }
+            });
+
             userRoleService.remove(new QueryWrapper<UserRole>().lambda().eq(UserRole::getUserId,userInfo.getId()).notIn(UserRole::getRid,roleIds));
         }
         return userInfo;
+    }
+
+    @Override
+    public int delUser(UserInfo userInfo) {
+        return userInfoMapper.updateById(userInfo);
     }
 }

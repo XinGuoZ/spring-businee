@@ -10,6 +10,7 @@ import cc.tg.tools.SecurityUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,7 @@ import java.util.Objects;
  * @since 2020-11-03
  */
 @Service
+@Slf4j
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 
 
@@ -60,9 +62,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
                     MenuRole menuRole = new MenuRole();
                     menuRole.setMid(menu.getId()).setRid(p);
                     menuRoles.add(menuRole);
+                    menuRole = new MenuRole();
+                    menuRole.setMid(menu.getParentId()).setRid(p);
+                    menuRoles.add(menuRole);
                 });
                 menuRoleService.remove(new QueryWrapper<MenuRole>().lambda().eq(MenuRole::getMid,menu.getId()).notIn(MenuRole::getRid,menu.getRoleIds()));
-                menuRoleService.saveBatch(menuRoles);
+                for (int i=0,size=menuRoles.size();i<size;i++) {
+                    MenuRole menuRole = menuRoles.get(i);
+                    int count = menuRoleService.count(new LambdaQueryWrapper<MenuRole>().eq(MenuRole::getMid, menuRole.getMid()).eq(MenuRole::getRid, menuRole.getRid()));
+                    if (count<1) {
+                        menuRoleService.save(menuRole);
+                    }
+
+                }
             }
             return menu;
         }else {

@@ -53,5 +53,13 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUserByRoleId(roleId));
     }
 
+    @ApiOperation("根据角色id获取用户")
+    @GetMapping("delUser/{id}")
+    public ResultVO delUser (@PathVariable("id") Long id) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(id);
+        userInfo.setRemoveStatus("1");
+        return ResultUtil.success(userInfoService.delUser(userInfo));
+    }
 
 }

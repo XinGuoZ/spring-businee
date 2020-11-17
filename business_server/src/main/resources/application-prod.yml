@@ -26,11 +26,4 @@ mybatis-plus:
 server:
   port: 9081
 logging:
-  level:
-    com.aixiao.sms: INFO
-    root: INFO
-    com.springms: INFO
-  file:
-    max-history: 1000
-    max-size: 7MB
-    name: /home/xig/server/logs/${spring.application.name}.log
+  config: classpath:logback-spring.xml

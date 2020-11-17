@@ -3,7 +3,6 @@ package cc.tg.service;
 import cc.tg.model.dto.QueryDeptDTO;
 import cc.tg.orm.entity.UserInfo;
 import cn.hutool.json.JSONObject;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -51,4 +50,13 @@ public interface IUserInfoService {
      * @return      cc.tg.orm.entity.UserInfo
      **/
     UserInfo addOrEditUser(UserInfo userInfo);
+
+    /**
+     * 删除用户
+     * @Author     xinguoz
+     * @Date        2020/11/17 21:32
+     * @Param       userInfo
+     * @return      java.lang.Object
+     **/
+    int delUser(UserInfo userInfo);
 }

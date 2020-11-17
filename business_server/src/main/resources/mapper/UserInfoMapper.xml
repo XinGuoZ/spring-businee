@@ -32,7 +32,7 @@
         </collection>
     </resultMap>
     <select id="getByUsername" resultMap="lazyLoadRoles">
-        select * from user_info WHERE username=#{username};
+        select * from user_info WHERE username=#{username} and remove_status ='0';
     </select>
     <select id="getRolesByUserId" resultType="cc.tg.orm.entity.Role">
         SELECT r.* FROM user_role h,role r where h.rid=r.id AND h.user_id=#{id}
@@ -52,11 +52,10 @@
             ui.create_at,
             ui.group_id ,
             ur.rid,
-            ur.user_id,
-            ur.id
+            ur.user_id
         FROM
             user_info ui
-        LEFT JOIN user_role ur on ui.id = ur.user_id
+        LEFT JOIN user_role ur on ui.id = ur.user_id and ui.remove_status ='0'
         WHERE
             group_id = #{id} AND remove_status = '0'
         <if test="pagination">
