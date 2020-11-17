@@ -9,13 +9,8 @@ import cc.tg.orm.mapper.UserInfoMapper;
 import cc.tg.service.IUserInfoService;
 import cc.tg.service.IUserRoleService;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static sun.plugin2.os.windows.FLASHWINFO.size;
 
 /**
  * <p>
