@@ -62,16 +62,19 @@ public class UserInfoServiceImpl implements IUserInfoService, UserDetailsService
         Integer count = userInfoMapper.selectCount(new QueryWrapper<UserInfo>().lambda()
                 .eq(UserInfo::getGroupId, queryDeptDTO.getId()).eq(UserInfo::getRemoveStatus, "0"));
         res.set("totalSize",count);
-        if(queryDeptDTO.getPagination()) {
-            queryDeptDTO.cal();
-            List<UserInfo> userInfos = userInfoMapper.selectList(new QueryWrapper<UserInfo>().select("id", "name", "phone", "telephone", "address", "username", "userface", "create_at", "group_id").lambda()
-                    .eq(UserInfo::getGroupId, queryDeptDTO.getId()).eq(UserInfo::getRemoveStatus, "0").last("limit "+queryDeptDTO.getStartRow()+","+queryDeptDTO.getEndRow()));
-                    res.set("list", userInfos);
-        }else {
-            List<UserInfo> userInfos = userInfoMapper.selectList(new QueryWrapper<UserInfo>().select("id", "name", "phone", "telephone", "address", "username", "userface", "create_at", "group_id").lambda()
-                    .eq(UserInfo::getGroupId, queryDeptDTO.getId()).eq(UserInfo::getRemoveStatus, "0"));
-            res.set("list", userInfos);
-        }
+        queryDeptDTO.cal();
+        List<UserInfo> userInfos = userInfoMapper.getUsersByDeptId(queryDeptDTO);
+//        if(queryDeptDTO.getPagination()) {
+//            queryDeptDTO.cal();
+//            List<UserInfo> userInfos = userInfoMapper.selectList(new QueryWrapper<UserInfo>().select("id", "name", "phone", "telephone", "address", "username", "userface", "create_at", "group_id").lambda()
+//                    .eq(UserInfo::getGroupId, queryDeptDTO.getId()).eq(UserInfo::getRemoveStatus, "0").last("limit "+queryDeptDTO.getStartRow()+","+queryDeptDTO.getEndRow()));
+//                    res.set("list", userInfos);
+//        }else {
+//            List<UserInfo> userInfos = userInfoMapper.selectList(new QueryWrapper<UserInfo>().select("id", "name", "phone", "telephone", "address", "username", "userface", "create_at", "group_id").lambda()
+//                    .eq(UserInfo::getGroupId, queryDeptDTO.getId()).eq(UserInfo::getRemoveStatus, "0"));
+//            res.set("list", userInfos);
+//        }
+        res.set("list", userInfos);
         return res;
     }
 
@@ -104,15 +107,15 @@ public class UserInfoServiceImpl implements IUserInfoService, UserDetailsService
         List<Long> roleIds = userInfo.getRoleIds();
         List<UserRole> userRoles = new ArrayList<>();
         if (i>0&&roleIds.size()>0) {
-            roleIds.forEach(roleId->{
+            for (int j =0 ,size = roleIds.size();j<size;j++) {
                 UserRole userRole = new UserRole();
-                userRole.setRid(userRole.getRid());
+                userRole.setRid(roleIds.get(j));
                 userRole.setUserId(userInfo.getId());
                 userRoles.add(userRole);
-            });
+            }
             userRoleService.saveBatch(userRoles);
             userRoleService.remove(new QueryWrapper<UserRole>().lambda().eq(UserRole::getUserId,userInfo.getId()).notIn(UserRole::getRid,roleIds));
         }
-        return null;
+        return userInfo;
     }
 }

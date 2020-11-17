@@ -15,6 +15,22 @@
         <result column="remark" property="remark"/>
         <collection property="roles" ofType="cc.tg.orm.entity.UserInfo" select="cc.tg.orm.mapper.UserInfoMapper.getRolesByUserId" column="id"/>
     </resultMap>
+
+    <resultMap id="BaseUser" type="cc.tg.orm.entity.UserInfo" >
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="telephone" property="telephone"/>
+        <result column="address" property="address"/>
+        <result column="enabled" property="enabled"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="userface" property="userface"/>
+        <result column="remark" property="remark"/>
+        <collection property="roleIds" ofType="java.lang.Long" column="user_id">
+            <id column="rid" />
+        </collection>
+    </resultMap>
     <select id="getByUsername" resultMap="lazyLoadRoles">
         select * from user_info WHERE username=#{username};
     </select>
@@ -23,6 +39,30 @@
     </select>
     <select id="getUserByRoleId" resultType="cc.tg.orm.entity.UserInfo">
         SELECT ui.* FROM user_info ui LEFT JOIN user_role ur on ui.id = ur.user_id where ur.rid=#{roleId}
+    </select>
+    <select id="getUsersByDeptId" resultMap="BaseUser">
+        SELECT
+            ui.id,
+            ui.NAME,
+            ui.phone,
+            ui.telephone,
+            ui.address,
+            ui.username,
+            ui.userface,
+            ui.create_at,
+            ui.group_id ,
+            ur.rid,
+            ur.user_id,
+            ur.id
+        FROM
+            user_info ui
+        LEFT JOIN user_role ur on ui.id = ur.user_id
+        WHERE
+            group_id = #{id} AND remove_status = '0'
+        <if test="pagination">
+            LIMIT #{startRow},#{endRow}
+        </if>
+
     </select>
 
 </mapper>

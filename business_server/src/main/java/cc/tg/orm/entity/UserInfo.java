@@ -115,6 +115,7 @@ public class UserInfo implements UserDetails {
 
     @ApiModelProperty(value = "用户角色")
     @TableField(exist = false)
+
     private List<Long> roleIds;
 
 
