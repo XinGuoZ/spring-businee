@@ -8,6 +8,7 @@ import cc.tg.tools.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,6 +44,7 @@ public class MenuController {
 
     @ApiModelProperty("添加和修改菜单")
     @PostMapping("/addorEditMenu")
+    @PreAuthorize("hasauthority('super_admin')")
     public ResultVO addorEditMenu(@Valid @RequestBody Menu menu) {
 
         return ResultUtil.success(menuService.addorEditMenu(menu));

@@ -40,12 +40,14 @@ public class RoleController {
         return ResultUtil.success(JSONUtil.parse(list));
     }
 
+    @PreAuthorize("hasauthority('super_admin','admin')")
     @ApiModelProperty("添加和修改权限")
     @PostMapping("/addOrEditRoles")
     public ResultVO addOrEditRoles(@RequestBody @Valid Role role) {
         return ResultUtil.success(roleService.addOrEditRoles(role));
     }
-    @ApiModelProperty("添加和修改权限")
+    @PreAuthorize("hasauthority('super_admin','admin')")
+    @ApiModelProperty("删除权限")
     @PostMapping("/delRoles/{id}")
     public ResultVO delRoles(@PathVariable("id") Long id) {
         Role role = new Role();

@@ -10,6 +10,7 @@ import cc.tg.tools.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,6 +38,7 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUsersByDeptId(queryDeptDTO));
     }
 
+    @PreAuthorize("hasauthority('super_admin','admin')")
     @ApiOperation("添加用户")
     @PostMapping("addOrEditUser")
     public ResultVO addOrEditUser (@Valid @RequestBody UserInfo userInfo) {
@@ -53,6 +55,7 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUserByRoleId(roleId));
     }
 
+    @PreAuthorize("hasauthority('super_admin','admin')")
     @ApiOperation("根据角色id获取用户")
     @GetMapping("delUser/{id}")
     public ResultVO delUser (@PathVariable("id") Long id) {
