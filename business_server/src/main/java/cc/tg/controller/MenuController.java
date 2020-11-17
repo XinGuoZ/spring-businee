@@ -42,9 +42,10 @@ public class MenuController {
         return ResultUtil.success(menuService.getMenuTree());
     }
 
+
     @ApiModelProperty("添加和修改菜单")
     @PostMapping("/addorEditMenu")
-    @PreAuthorize("hasauthority('super_admin')")
+    @PreAuthorize("hasAuthority('super_admin')")
     public ResultVO addorEditMenu(@Valid @RequestBody Menu menu) {
 
         return ResultUtil.success(menuService.addorEditMenu(menu));

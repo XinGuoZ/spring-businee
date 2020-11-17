@@ -38,7 +38,7 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUsersByDeptId(queryDeptDTO));
     }
 
-    @PreAuthorize("hasauthority('super_admin','admin')")
+    @PreAuthorize("hasAnyAuthority('super_admin','admin')")
     @ApiOperation("添加用户")
     @PostMapping("addOrEditUser")
     public ResultVO addOrEditUser (@Valid @RequestBody UserInfo userInfo) {
@@ -55,7 +55,7 @@ public class UserInfoController {
         return ResultUtil.success(userInfoService.getUserByRoleId(roleId));
     }
 
-    @PreAuthorize("hasauthority('super_admin','admin')")
+    @PreAuthorize("hasAnyAuthority('super_admin','admin')")
     @ApiOperation("根据角色id获取用户")
     @GetMapping("delUser/{id}")
     public ResultVO delUser (@PathVariable("id") Long id) {
