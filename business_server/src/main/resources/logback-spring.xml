@@ -32,10 +32,10 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>/home/xig/server/logs/business/logback.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
             <maxHistory>7</maxHistory>
-            <totalSizeCap>5GB</totalSizeCap>
+            <totalSizeCap>100MB</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>1GB</maxFileSize>
+                <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
