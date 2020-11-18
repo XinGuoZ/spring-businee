@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -40,10 +41,12 @@ public class RoleController {
     @ApiModelProperty("全部权限列表")
     @GetMapping("/roleTree")
     public ResultVO getRoles() {
-        Authentication authentication = SecurityUtils.getAuthentication();
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        boolean super_admin = authorities.contains("super_admin");
-        List<Role> list = roleService.list(new LambdaQueryWrapper<Role>().eq(Role::getRemoveStatus, "0").eq(Role::isSuperAdmin,super_admin));
+        String s = SecurityUtils.getAuthentication().getAuthorities().toString();
+        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<Role>().eq(Role::getRemoveStatus, "0");
+        if (!StringUtils.contains(s,"super_admin")) {
+            queryWrapper.eq(Role::isSuperAdmin,false);
+        }
+        List<Role> list = roleService.list(queryWrapper);
         return ResultUtil.success(JSONUtil.parse(list));
     }
 
