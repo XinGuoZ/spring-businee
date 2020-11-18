@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/tg/employee")
-@Api("普通用户")
+@Api(value = "人员管理",tags = {"人员管理"})
 public class EmployeeController {
 
 }

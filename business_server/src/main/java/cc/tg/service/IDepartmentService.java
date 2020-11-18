@@ -3,6 +3,8 @@ package cc.tg.service;
 import cc.tg.orm.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IDepartmentService extends IService<Department> {
 
+    List<Department> loadDeptList();
+
+    Department addDept(Department dept);
+
+    Department editDept(Department dept);
+
+    boolean delDept(Integer id);
 }
