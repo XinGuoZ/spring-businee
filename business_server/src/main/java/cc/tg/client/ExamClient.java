@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @FeignClient(url =" ${server.examUrl}",name="exam")
-public class ExamClient {
+public interface ExamClient {
 }
