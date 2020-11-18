@@ -28,9 +28,9 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logging.path:-/logs/business}/logback.log</file>
+        <file>/home/xig/server/logs/business/logback.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${logging.path:-/logs/business}/logback.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <fileNamePattern>/home/xig/server/logs/business/logback.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
             <maxHistory>7</maxHistory>
             <totalSizeCap>5GB</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy
