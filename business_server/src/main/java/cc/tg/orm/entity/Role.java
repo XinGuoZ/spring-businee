@@ -51,4 +51,16 @@ public class Role implements Serializable {
     @ApiModelProperty(hidden = true)
     private String createAt;
 
+    /**
+     * 权限组id
+     */
+    @ApiModelProperty(name="权限组id")
+    private Long groupId;
+
+    /**
+     * 是否为管理
+     */
+    @ApiModelProperty(name="管理员")
+    private boolean superAdmin;
+
 }

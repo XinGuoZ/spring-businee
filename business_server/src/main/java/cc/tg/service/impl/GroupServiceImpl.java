@@ -26,7 +26,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, SysGroup> impleme
     @Override
     public SysGroup loadGroupList() {
         //获取当前登入用户
-        UserInfo userInfo = SecurityUtils.getCurrentHr();
+        UserInfo userInfo = SecurityUtils.getCurrentHrUser();
         SysGroup group = baseMapper.selectById(userInfo.getGroupId());
         if (group.getIsParent()) {
             recursionGroup(group);

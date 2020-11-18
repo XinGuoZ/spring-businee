@@ -1,6 +1,5 @@
 package cc.tg.service.impl;
 
-import cc.tg.config.security.SecurityConfig;
 import cc.tg.orm.entity.*;
 import cc.tg.orm.mapper.MenuMapper;
 import cc.tg.service.IMenuRoleService;
@@ -11,15 +10,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <p>
@@ -41,7 +37,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<Menu> getMenusByUserId() {
 
-        return baseMapper.getMenusByUserId(SecurityUtils.getCurrentHr().getId());
+        return baseMapper.getMenusByUserId(SecurityUtils.getCurrentHrUser().getId());
     }
 
     @Override

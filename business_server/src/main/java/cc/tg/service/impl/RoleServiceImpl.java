@@ -31,7 +31,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
     @Override
     public Role addOrEditRoles(Role role) {
-        if (Objects.isNull(role)){
+        if (Objects.isNull(role.getId())){
+
             role.setCreateAt(DateUtil.now());
         }
         if (saveOrUpdate(role)) {

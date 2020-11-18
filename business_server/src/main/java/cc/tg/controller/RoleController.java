@@ -5,16 +5,20 @@ import cc.tg.model.vo.ResultVO;
 import cc.tg.orm.entity.Role;
 import cc.tg.service.IRoleService;
 import cc.tg.tools.ResultUtil;
-import cn.hutool.json.JSONArray;
+import cc.tg.tools.SecurityUtils;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,7 +40,10 @@ public class RoleController {
     @ApiModelProperty("全部权限列表")
     @GetMapping("/roleTree")
     public ResultVO getRoles() {
-        List<Role> list = roleService.list(new LambdaQueryWrapper<Role>().eq(Role::getRemoveStatus, "0"));
+        Authentication authentication = SecurityUtils.getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        boolean super_admin = authorities.contains("super_admin");
+        List<Role> list = roleService.list(new LambdaQueryWrapper<Role>().eq(Role::getRemoveStatus, "0").eq(Role::isSuperAdmin,super_admin));
         return ResultUtil.success(JSONUtil.parse(list));
     }
 

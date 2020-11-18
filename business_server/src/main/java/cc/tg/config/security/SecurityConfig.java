@@ -1,32 +1,26 @@
 package cc.tg.config.security;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import cc.tg.config.exception.SystemErrorType;
 import cc.tg.model.vo.ResultVO;
-import cc.tg.service.IUserInfoService;
 import cc.tg.service.impl.UserInfoServiceImpl;
 import cc.tg.tools.ResultUtil;
 import cc.tg.tools.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,7 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                     response.setContentType("application/json;charset=utf-8");
                     PrintWriter out = response.getWriter();
-                    out.write(objectMapper.writeValueAsString(ResultUtil.success(SecurityUtils.getCurrentHr())));
+                    out.write(objectMapper.writeValueAsString(ResultUtil.success(SecurityUtils.getCurrentHrUser())));
                     out.flush();
                     out.close();
                 })
