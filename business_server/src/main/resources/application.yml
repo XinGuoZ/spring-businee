@@ -3,4 +3,4 @@ spring:
   profiles:
     active: @activatedProperties@
 server:
-  examUrl: http://47.113.206.36/exam
+  examUrl: 47.113.206.36
