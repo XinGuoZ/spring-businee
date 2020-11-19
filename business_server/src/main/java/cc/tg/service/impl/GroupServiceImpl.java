@@ -69,7 +69,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, SysGroup> impleme
         if(sysGroup.getIsParent()) {
             removeRecursionGroup(sysGroup);
         }
-        int i = count(new LambdaQueryWrapper<SysGroup>().eq(SysGroup::getParentId, sysGroup.getIsParent()).eq(SysGroup::getRemoveStatus, "0"));
+        int i = count(new LambdaQueryWrapper<SysGroup>().eq(SysGroup::getParentId, sysGroup.getId()).eq(SysGroup::getRemoveStatus, "0"));
         sysGroup.setRemoveStatus("1");
         //将上一级节点改为字节点
         if (i==0) {
@@ -108,7 +108,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, SysGroup> impleme
         List<SysGroup> groups = baseMapper.selectList(new LambdaQueryWrapper<SysGroup>().eq(SysGroup::getParentId, group.getId()).eq(SysGroup::getRemoveStatus, "0"));
         for (SysGroup p : groups) {
             if (p.getIsParent()) {
-                recursionGroup(p);
+                removeRecursionGroup(p);
             }
             p.setRemoveStatus("1");
             saveOrUpdate(p);
