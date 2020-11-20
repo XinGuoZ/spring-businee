@@ -20,7 +20,6 @@ import java.util.Objects;
 
 
 @Slf4j
-
 @RestControllerAdvice
 public class MyExceptionHandler {
 
