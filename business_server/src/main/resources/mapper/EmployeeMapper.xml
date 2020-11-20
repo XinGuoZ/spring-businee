@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.tg.orm.mapper.EmployeeMapper">
 
+    <select id="getUsersByDeptId" resultType="cc.tg.orm.entity.Employee">
+        SELECT
+            *
+        FROM
+        employee emp
+        WHERE
+        department_id = #{id} AND remove_status = '0'
+        <if test="pagination">
+            LIMIT #{startRow},#{endRow}
+        </if>
+    </select>
 </mapper>
