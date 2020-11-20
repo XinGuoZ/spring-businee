@@ -1,9 +1,36 @@
 spring:
+  kafka:
+    #服务地址
+    bootstrap-servers: localhost:9092
+    #生产者配制
+    producer:
+      #重试次数
+      batch-size: 16
+      retries: 0
+      #缓冲区大小32MB
+      buffer-memory: 33554432
+      #key序列化
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      #Kafka中没有初始偏移或如果当前偏移在服务器上不再存在时,默认区最新 ，有三个选项：latest, earliest, none
+      auto-offset-reset: latest
+      #自动提交的时间间隔
+      auto-commit-interval: 100
+      #是否开启自动提交
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #在kafka/config文件的consumer.properties中有配置
+      client-id: test-comsumer-group
+      #批量一次最大拉取数据量
+      max-poll-records: 1000
+      group-id: test1
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    username: xig
     password: 123
-    url: jdbc:mysql://localhost:3306/business?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false&useJDBCCompliantTimezoneShift=true&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:31260/business?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false&useJDBCCompliantTimezoneShift=true&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
   application:
     name: business
   redis:
@@ -25,3 +52,9 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
 server:
   port: 9081
+logging:
+  config: classpath:logback-spring.xml
+  path: /home/xig/logs
+topicName:
+  topic1: test1
+  topic2: test2
