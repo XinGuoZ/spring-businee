@@ -54,8 +54,8 @@ public class DepartmentController {
     }
 
     @ApiOperation("删除管理组")
-    @PostMapping("/delGroup/{id}")
-    public ResultVO delGroup (@PathVariable("id") Integer id) {
+    @PostMapping("/delDept/{id}")
+    public ResultVO delDept (@PathVariable("id") Integer id) {
         if (departmentService.delDept(id)) {
             return ResultUtil.success("删除成功", true);
         }else {

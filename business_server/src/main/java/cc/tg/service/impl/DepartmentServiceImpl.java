@@ -30,7 +30,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
         });
 
-        return null;
+        return departmentList;
     }
 
     private void replyList(Department department) {
@@ -55,7 +55,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         }
         saveOrUpdate(dept);
         //处理当前部门节点
-        dept.setDepPath(departmentF.getDepPath()+"."+departmentF.getId());
+        dept.setDepPath(departmentF.getDepPath()+"."+dept.getId());
         saveOrUpdate(dept);
         return dept;
     }
