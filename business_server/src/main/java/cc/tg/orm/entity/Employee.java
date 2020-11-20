@@ -176,5 +176,9 @@ public class Employee implements Serializable {
      */
     private String createAt;
 
-
+    /**
+     *
+     * 用户头像
+     * */
+    private String userface;
 }
