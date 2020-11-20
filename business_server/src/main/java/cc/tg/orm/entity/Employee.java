@@ -2,6 +2,9 @@ package cc.tg.orm.entity;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -24,6 +27,7 @@ public class Employee implements Serializable {
     /**
      * 员工编号
      */
+    @TableId(value = "id",type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
@@ -159,7 +163,7 @@ public class Employee implements Serializable {
     /**
      * 工龄
      */
-    private Integer workAge;
+    private Integer work_age;
 
     /**
      * 备注
