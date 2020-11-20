@@ -18,12 +18,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.Objects;
 
-/**
- * @Invoicequeryor lgt
- * Date: Created in 2019-11-08 14:42
- * Utils: Intellij Idea
- * Description: 全局异常捕获
- */
 
 @Slf4j
 
