@@ -38,6 +38,8 @@ public class MyConst {
 
     public static final String OPT_SUCCESS = "操作成功";
 
+    public static final String EMAILMQ = "email" ;
+
     public static enum ExamMap {
         A(0),
         B(1),
