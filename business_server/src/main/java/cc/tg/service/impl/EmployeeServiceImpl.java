@@ -34,4 +34,18 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         res.set("list", emps);
         return res;
     }
+
+    @Override
+    public Employee addOrEditEmp(Employee employee) {
+        if (saveOrUpdate(employee)) {
+            return employee;
+        }
+        return null;
+    }
+
+    @Override
+    public int delEmp(List<Long> ids) {
+
+        return baseMapper.delEmp(ids);
+    }
 }

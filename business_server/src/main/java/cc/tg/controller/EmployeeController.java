@@ -3,18 +3,16 @@ package cc.tg.controller;
 
 import cc.tg.model.dto.QueryEmpDTO;
 import cc.tg.model.vo.ResultVO;
+import cc.tg.orm.entity.Employee;
 import cc.tg.service.IEmployeeService;
 import cc.tg.tools.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -36,6 +34,20 @@ public class EmployeeController {
     @PostMapping("/getUsersByDeptId")
     public ResultVO getEmpByDeptId (@Valid @RequestBody QueryEmpDTO queryEmpDTO) {
         return ResultUtil.success(employeeService.getEmpssByDeptId(queryEmpDTO));
+    }
+
+    @ApiOperation("添加和修改管理员")
+    @PostMapping("/addOrEditEmp")
+    public ResultVO addOrEditEmp(@Valid @RequestBody Employee employee) {
+
+       return ResultUtil.success(employeeService.addOrEditEmp(employee));
+    }
+
+    @ApiOperation("根据id删除")
+    @PostMapping("/delEmp")
+    public ResultVO delEmp(@RequestParam("ids") List<Long> ids) {
+
+        return ResultUtil.success(employeeService.delEmp(ids));
     }
 
 

@@ -4,6 +4,7 @@ import cc.tg.model.dto.QueryEmpDTO;
 import cc.tg.orm.entity.Department;
 import cc.tg.orm.entity.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ import java.util.List;
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
     List<Employee> getUsersByDeptId(QueryEmpDTO queryEmpDTO);
+
+    int delEmp(@Param("ids") List<Long> ids);
+
 }

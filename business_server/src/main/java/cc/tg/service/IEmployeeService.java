@@ -25,4 +25,23 @@ public interface IEmployeeService extends IService<Employee> {
      * @return      java.util.List<cc.tg.orm.entity.Department>
      **/
     JSONObject getEmpssByDeptId(QueryEmpDTO queryEmpDTO);
+
+    /**
+     * 添加修改管理员
+     * @Author     xinguoz
+     * @Date        2020/11/20 16:12
+     * @Param       employee
+     * @return      cc.tg.orm.entity.Employee
+     **/
+    Employee addOrEditEmp(Employee employee);
+
+    /**
+     *
+     * 批量删除
+     * @Author     xinguoz
+     * @Date        2020/11/20 16:15
+     * @Param       ids
+     * @return      int
+     **/
+    int delEmp(List<Long> ids);
 }
