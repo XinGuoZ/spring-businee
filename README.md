@@ -12,11 +12,13 @@
 
 ------
 
+|      | gitee                                      | github                                    |
+| ---- | ------------------------------------------ | ----------------------------------------- |
+| 前端 | https://gitee.com/ZXMW/myant.git           | https://github.com/XinGuoZ/myant          |
+| 后段 | https://gitee.com/ZXMW/spring-bussness.git | https://github.com/XinGuoZ/spring-businee |
+
 演示地址：http://47.113.206.36 		账号：admin		密码：admin123
 
-
-
-前端仓库地址：https://gitee.com/ZXMW/myant.git
 
 
 
