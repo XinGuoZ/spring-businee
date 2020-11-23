@@ -44,20 +44,20 @@ cc.tg
 
 1.登入
 
-![login](pic\login.png)
+![login](pic/login.png)
 
 2.菜单管理
 
-![mune](pic\mune.png)
+![mune](pic/mune.png)
 
 3.权限
 
-![role](pic\role.png)
+![role](pic/role.png)
 
 4.用户
 
-![user](pic\user.png)
+![user](pic/user.png)
 
 5.人员管理
 
-![emp](pic\emp.png)
+![emp](pic/emp.png)
